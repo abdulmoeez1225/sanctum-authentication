@@ -6,7 +6,9 @@ use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -18,8 +20,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
-
-        return new UserResource($user);
+        return "abc";
     }
 
     /**
@@ -41,14 +42,25 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
 
+
         $userData = [
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'password' => Hash::make($request->password),
         ];
         $user = User::create($userData);
 
-        return new UserResource($user);
+        event(new Registered($user));
+
+
+        $token = $user->createToken('authtoken');
+
+        return response()->json(
+            [
+                'message'=>'User Registered',
+                'data'=> ['token' => $token->plainTextToken, 'user' => $user]
+            ]
+        );
     }
 
     /**

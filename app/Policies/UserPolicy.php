@@ -29,9 +29,9 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        if ($user->can('admin')) {
-            return true;
-        }
+//        if ($user->can('admin')) {
+//            return true;
+//        }
     }
 
     /**
@@ -42,10 +42,12 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        if ($user->can('viewer')) {
-            return false;
-        }
+//        if ($user->can('viewer')) {
+//            return true;
+//        }
     }
+
+
 
     /**
      * Determine whether the user can update the model.
