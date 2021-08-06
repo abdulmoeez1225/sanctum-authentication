@@ -20,7 +20,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
-        return "abc";
+        return new UserResource($user);
     }
 
     /**
