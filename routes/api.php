@@ -36,23 +36,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('post/{post}')->uses('PostController@update');
     Route::delete('post/{post}')->uses('PostController@destroy');
 
-//
-//    Route::get('user')->uses('UserController@create');
-//    Route::get('user/{user}/edit')->uses('UserController@edit');
-//    Route::post('user')->uses('UserController@store');
-//    Route::get('user/{user}')->uses('UserController@show');
-//    Route::put('user/{user}')->uses('UserController@update');
-//    Route::delete('user/{user}')->uses('UserController@destroy');
+    Route::get('user/{user}')->uses('UserController@show');
+    Route::get('user')->uses('UserController@index');
+    Route::put('user/{user}')->uses('UserController@update');
+    Route::delete('user/{user}')->uses('UserController@destroy');
 });
 
 
-Route::get('user')->uses('UserController@index');
+
 Route::get('user/create')->uses('UserController@create');
 Route::get('user/{user}/edit')->uses('UserController@edit');
 Route::post('user')->uses('UserController@store');
-Route::get('user/{user}')->uses('UserController@show');
-Route::put('user/{user}')->uses('UserController@update');
-Route::delete('user/{user}')->uses('UserController@destroy');
+
+
 
 
 
