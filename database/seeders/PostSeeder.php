@@ -19,6 +19,7 @@ class PostSeeder extends Seeder
         $faker = Faker::create();
         foreach (range(1, 100) as $index) {
             Post::create([
+                'user_id' => 1,
                 'title' => $faker->sentence(4),
                 'body' => $faker->paragraph(4),
             ]);
