@@ -17,6 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
+
+//        $this->authorize();
         $post = Post::all();
 
         return new PostResource($post);

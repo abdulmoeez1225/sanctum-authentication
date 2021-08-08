@@ -23,7 +23,7 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $request->authenticate();
+
 
         $request->validate([
             'email' => 'required',
@@ -68,7 +68,7 @@ class AuthController extends Controller
         ];
         $user = User::create($userData);
 
-//        event(new Registered($user));
+        event(new Registered($user));
 
 
         $token = $user->createToken('authtoken');

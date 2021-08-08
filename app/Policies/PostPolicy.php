@@ -2,10 +2,11 @@
 
 namespace App\Policies;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class PostPolicy
 {
     use HandlesAuthorization;
 
@@ -17,21 +18,22 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        //
+
+//        if($user->can('view')){
+            return dd(true);
+//        }
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, User $model)
+    public function view(User $user, Post $post)
     {
-//        if ($user->can('admin')) {
-//            return true;
-//        }
+
     }
 
     /**
@@ -42,66 +44,54 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        if ($user->can('Can see')) {
-            return true;
-        }
+        //
     }
-
-
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, User $model)
+    public function update(User $user, Post $post)
     {
-        if ($user->can('admin')) {
-            return true;
-        }
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, User $model)
+    public function delete(User $user, Post $post)
     {
-        if ($user->can('admin')) {
-            return true;
-        }
+        //
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, User $model)
+    public function restore(User $user, Post $post)
     {
-        if ($user->can('admin')) {
-            return true;
-        }
+        //
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user, Post $post)
     {
-        if ($user->can('admin')) {
-            return true;
-        }
+        //
     }
 }
