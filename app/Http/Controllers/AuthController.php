@@ -23,7 +23,7 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $request->authenticate();
+//        $request->authenticate();
 
         $request->validate([
             'email' => 'required',

@@ -17,7 +17,9 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        if ($user->can('can.view')) {
+            return true;
+        }
     }
 
     /**
