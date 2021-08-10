@@ -18,9 +18,9 @@ class RoleAndPermissionSeeder extends Seeder
         //
 
 
-        $viewer = Permission::create(['name' => 'Can see']);
-        $editor = Permission::create(['name' => 'Editor']);
-        $administrator = Permission::create(['name' => 'Administrator']);
+        $viewer = Permission::create(['name' => 'can.view']);
+        $editor = Permission::create(['name' => 'editor']);
+        $administrator = Permission::create(['name' => 'administrator']);
 
         $roleAdmin = Role::create(['name' => 'admin']);
         $roleAdmin->givePermissionTo($administrator);

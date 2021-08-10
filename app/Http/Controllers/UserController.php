@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Post;
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -57,8 +59,8 @@ class UserController extends Controller
 
         return response()->json(
             [
-                'message'=>'User Registered',
-                'data'=> ['token' => $token->plainTextToken, 'user' => $user]
+                'message' => 'User Registered',
+                'data' => ['token' => $token->plainTextToken, 'user' => $user]
             ]
         );
     }
@@ -71,8 +73,26 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return new UserResource($user->post);
     }
+
+    public function show_many_record($id)
+    {
+        $user = User::findOrFail($id);
+        return new UserResource($user->post);
+    }
+
+    public function many_to_many_roles($id){
+        $user = User::find($id);
+        return $user->user_roles;
+    }
+
+    public function many_to_many_users($id){
+        $user = UserRole::find($id);
+         return $user->users;
+    }
+
 
     /**
      * Show the form for editing the specified resource.

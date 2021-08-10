@@ -7,9 +7,18 @@ use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Post::class, 'post', [
+            'except' => ['index'],
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -43,6 +52,7 @@ class PostController extends Controller
         $userData = [
             'title' => $request->title,
             'body' => $request->body,
+            'user_id' => Auth::user()->id,
 
         ];
         $user = Post::create($userData);

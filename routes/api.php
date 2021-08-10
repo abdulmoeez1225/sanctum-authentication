@@ -27,7 +27,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login')->uses('AuthController@login');
 Route::get('register')->uses('AuthController@register');
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+//Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('post')->uses('PostController@index');
     Route::get('post/create')->uses('PostController@create');
     Route::get('post/{post}/edit')->uses('PostController@edit');
@@ -40,13 +40,20 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('user')->uses('UserController@index');
     Route::put('user/{user}')->uses('UserController@update');
     Route::delete('user/{user}')->uses('UserController@destroy');
-});
+//});
 
 
 
 Route::get('user/create')->uses('UserController@create');
 Route::get('user/{user}/edit')->uses('UserController@edit');
 Route::post('user')->uses('UserController@store');
+
+Route::get('user/many_to_many_roles/{many_to_many_roles}')->uses('UserController@many_to_many_roles');
+Route::get('user/many_to_many_users/{many_to_many_users}')->uses('UserController@many_to_many_users');
+
+
+
+
 
 
 
@@ -61,9 +68,9 @@ Route::post('email/verification-notification', [EmailVerificationController::cla
 Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify')->middleware('auth:sanctum');
 
 Route::post('forgot-password', [NewPasswordController::class, 'forgotPassword']);
-Route::post('reset-password', [NewPasswordController::class, 'reset']);
+Route::post('reset-password', [NewPasswordController::class, 'reset'])->name('password.reset');
 
-
+Route::resource('comment','CommentController');
 
 //Route::resource('user','UserController');
 //Route::resource('post','PostController');
